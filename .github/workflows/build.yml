@@ -31,6 +31,9 @@ jobs:
       env:
         BUILD_MODE: debug
 
+    - name: List files
+      run: ls -R
+
     - name: Upload APK to Artifacts
       uses: actions/upload-artifact@v2
       with:
