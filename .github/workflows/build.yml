@@ -1,41 +1,20 @@
-name: Build APK
-
 on:
   push:
-    branches:
-      - master  # или main, если используешь ветку main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - name: Build APK
+        uses: digreatbrian/buildozer-action@v2
+        with:
+          python-version: 3.8
+          buildozer-cmd: buildozer -v android debug
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y python3-pip build-essential git zip unzip openjdk-17-jdk libncurses5 libstdc++6 zlib1g zlib1g-dev
-        python3 -m pip install --upgrade pip
-        pip install buildozer
-
-    - name: Build APK
-      run: |
-        buildozer -v android debug
-      env:
-        BUILD_MODE: debug
-
-    - name: List files
-      run: ls -R
-
-    - name: Upload APK to Artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: apk
-        path: bin/*.apk
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: ./bin/*.apk
