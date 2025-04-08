@@ -7,6 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip build-essential git zip unzip openjdk-17-jdk libncurses5 libstdc++6 zlib1g zlib1g-dev
+          sudo apt-get install -y libtinfo-dev  # Устанавливаем libtinfo-dev вместо libtinfo5
+          python3 -m pip install --upgrade pip
+          pip install buildozer
       - name: Build APK
         uses: digreatbrian/buildozer-action@v2
         with:
