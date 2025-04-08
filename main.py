@@ -1,9 +1,19 @@
-from kivy.app import App
-from kivy.uix.label import Label
+from kivymd.app import MDApp
+from kivy.lang import Builder
 
-class MyApp(App):
+class SampleApp(MDApp):
+    
     def build(self):
-        return Label(text="Hello, Bill Stat App!")
+        self.appKv='''
+MDScreen:
+    MDLabel:
+        text:'Hello,World.'
+        multiline:True
+        color:"blue"
+        halign:'center'         
+'''
+        AppScreen=Builder.load_string(self.appKv)
+        return AppScreen
 
-if __name__ == "__main__":
-    MyApp().run()
+SampleApp().run()
+    
