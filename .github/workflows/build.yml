@@ -8,7 +8,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip build-essential git zip unzip openjdk-17-jdk libncurses5 libstdc++6 zlib1g zlib1g-dev
