@@ -35,7 +35,7 @@ jobs:
       run: ls -R
 
     - name: Upload APK to Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: apk
         path: bin/*.apk
